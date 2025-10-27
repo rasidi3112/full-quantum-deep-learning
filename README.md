@@ -143,7 +143,7 @@ This will load the default configuration from configs/default.yaml, prepare the 
 
 Users can override the default settings by providing a different YAML configuration file:  
 ```bash
-python scripts/train.py --config configs/my_custom_config.yaml
+PYTHONPATH=src python scripts/train.py --config configs/my_custom_config.yaml
 ```
 🔹 Resuming Training
 
