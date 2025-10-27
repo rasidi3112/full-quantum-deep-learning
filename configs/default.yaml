@@ -1,0 +1,49 @@
+project:
+  name: full-quantum-deep-learning
+
+data:
+  n_qubits: 6
+  n_train: 4096
+  n_val: 1024
+  n_test: 1024
+  batch_size: 32
+  num_workers: 0
+  shuffle: true
+  synthetic: true
+  dataset_path: null
+  cache_dir: artifacts/cache
+
+model:
+  n_qubits: 6
+  circuit_layers: 4
+  measurement_wires: [0, 1, 2]
+  use_trainable_post_rotations: true
+  classical_head_width: 64
+  output_dim: 2
+  feature_map: hybrid
+  ansatz: strongly_entangling
+  shots: null
+  device: lightning.qubit
+
+training:
+  epochs: 50
+  learning_rate: 0.002
+  weight_decay: 0.0001
+  grad_clip_norm: 1.0
+  optimizer: adamw
+  mixed_precision: false
+  scheduler:
+    type: cosine
+    min_lr: 0.0001
+  early_stopping:
+    patience: 10
+    metric: val_loss
+    mode: min
+
+logging:
+  log_interval: 10
+  checkpoint_dir: artifacts/checkpoints
+  best_checkpoint: artifacts/checkpoints/best.pt
+  enable_tensorboard: false
+
+seed: 42

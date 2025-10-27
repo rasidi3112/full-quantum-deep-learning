@@ -1,0 +1,14 @@
+method: bayes
+metric:
+  name: val_loss
+  goal: minimize
+parameters:
+  lr:
+    min: 0.0001
+    max: 0.01
+  batch_size:
+    values: [16, 32, 64]
+  n_qubits:
+    values: [2, 4, 6]
+  feature_strategy:
+    values: ["angle", "hybrid"]
