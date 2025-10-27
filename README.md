@@ -163,5 +163,23 @@ Note:
 The direct invocation of a sweep agent as shown in the source (wandb.agent(...)) is specific to Weights & Biases (W&B), not a native Python command.  
 The above is a generic Optuna command for starting a study.  
 
+## Weights & Biases (W&B) Integration –  
+1.Install all project dependencies (including wandb):  
+```bash
+pip install -r requirements.txt
+```
+
+2.Authenticate your W&B account:  
+```bash
+wandb login
+```
+"*Paste your API key from https://wandb.ai/authorize .*"  
+
+3.Start training:  
+```bash
+python scripts/train.py
+```
+Done. Experiment metrics (loss, accuracy, etc.) will automatically stream to your wandb.ai dashboard.  
+"*No code changes needed—your project is already W&B-ready. Just ensure wandb login succeeds.*"
 
 
