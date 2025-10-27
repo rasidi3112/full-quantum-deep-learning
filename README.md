@@ -150,7 +150,7 @@ PYTHONPATH=src python scripts/train.py --config configs/my_custom_config.yaml
 The project supports resuming training from a saved checkpoint.  
 This is useful if a training job was interrupted:  
 ```bash
-python scripts/train.py --resume --checkpoint artifacts/checkpoints/best.pt
+PYTHONPATH=src python scripts/train.py --resume --checkpoint artifacts/checkpoints/best.pt
 ```
 🔹 Running a Sweep with Optuna
 
