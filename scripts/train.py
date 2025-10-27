@@ -6,11 +6,11 @@ from typing import Optional
 
 import tyro # type: ignore
 
-from qdl.config import load_config
-from qdl.data import create_dataloaders
-from qdl.model import QuantumDeepLearningModel
-from qdl.trainer import QDLTrainer
-from qdl.utils import console, count_trainable_parameters, set_seed
+from qdl.config import load_config # type: ignore
+from qdl.data import create_dataloaders # type: ignore
+from qdl.model import QuantumDeepLearningModel # type: ignore
+from qdl.trainer import QDLTrainer # type: ignore
+from qdl.utils import console, count_trainable_parameters, set_seed # type: ignore
 
 
 @dataclass
