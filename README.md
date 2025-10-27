@@ -134,7 +134,7 @@ Users can execute the training process with various command-line options to cust
 
 To run the training with the default configuration, simply execute:  
 ```bash
-python scripts/train.py
+PYTHONPATH=src python scripts/train.py --config configs/default.yaml
 ```
 
 This will load the default configuration from configs/default.yaml, prepare the synthetic dataset, instantiate the model, and begin the training loop as specified in the   configuration <user_query>.  
