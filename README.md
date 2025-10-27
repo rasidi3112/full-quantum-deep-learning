@@ -124,7 +124,44 @@ For those wishing to contribute or develop the project further, optional develop
 ```bash
 pip install -r requirements-dev.txt
 ```
+This ensures compatibility with tools such as Ruff, MyPy, Black, and PyTest <user_query>.  
 
+## Execution  
+Once the environment is set up, the primary entry point for training the model is the scripts/train.py script.  
+Users can execute the training process with various command-line options to customize the run.  
+
+🔹 Basic Training  
+
+To run the training with the default configuration, simply execute:  
+```bash
+python scripts/train.py
+```
+
+This will load the default configuration from configs/default.yaml, prepare the synthetic dataset, instantiate the model, and begin the training loop as specified in the   configuration <user_query>.  
+
+🔹 Using a Custom Configuration File  
+
+Users can override the default settings by providing a different YAML configuration file:  
+```bash
+python scripts/train.py --config configs/my_custom_config.yaml
+```
+🔹 Resuming Training
+
+The project supports resuming training from a saved checkpoint.  
+This is useful if a training job was interrupted:  
+```bash
+python scripts/train.py --resume --checkpoint artifacts/checkpoints/best.pt
+```
+🔹 Running a Sweep with Optuna
+
+The project is configured for hyperparameter optimization using Optuna.  
+A sweep configuration is defined in sweep.yaml. To start an Optuna study, run:  
+```bash
+optuna study optimize --storage sqlite:///optuna.db --study-name my_study scripts/hpo_objective.py
+```
+Note:  
+The direct invocation of a sweep agent as shown in the source (wandb.agent(...)) is specific to Weights & Biases (W&B), not a native Python command.  
+The above is a generic Optuna command for starting a study.  
 
 
 
