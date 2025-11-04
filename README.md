@@ -157,7 +157,7 @@ PYTHONPATH=src python scripts/train.py --resume --checkpoint artifacts/checkpoin
 The project is configured for hyperparameter optimization using Optuna.  
 A sweep configuration is defined in sweep.yaml. To start an Optuna study, run:  
 ```bash
-optuna study optimize --storage sqlite:///optuna.db --study-name my_study scripts/hpo_objective.py
+python -m optuna.cli optimize scripts/hpo_objective.py OR python -m optuna.cli studies --storage sqlite:///optuna.db 
 ```
 Note:  
 The direct invocation of a sweep agent as shown in the source (wandb.agent(...)) is specific to Weights & Biases (W&B), not a native Python command.  
