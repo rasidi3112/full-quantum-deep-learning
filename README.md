@@ -93,7 +93,8 @@ To enable users to effectively utilize, adapt, and contribute to the full-quantu
 
 ### 🧩 Installation
 
-The project relies on a specific ecosystem of Python packages. The `pyproject.toml` and `requirements.txt` files list the core dependencies required for the project to function, including **PennyLane**, **PyTorch**, **NumPy**, **Scikit-learn**, and their respective dependencies `<user_query>`. To install the project and its dependencies, users should follow these steps:
+Below is the quickest, cross-platform way to get a byte-perfect copy of the runtime that we use in CI and production.
+The lock-file guarantees no compilation (no Fortran, no CMake, no Xcode) on Windows 10+, Ubuntu 20+, macOS 12+ (Intel & Apple-Silicon) with CPython 3.9–3.11.
 
 #### 1. Clone the Repository
 First, clone the project's GitHub repository to a local directory:
@@ -103,28 +104,31 @@ git clone https://github.com/rasidi3112/full-quantum-deep-learning.git
 cd full-quantum-deep-learning
 ```
 
-#### 2.Set Up a Virtual Environment (Recommended)  
-It is strongly recommended to create a virtual environment to avoid conflicts with other Python packages.  
+#### 2. Create a Python 3.11 virtual-environment
+Python 3.12 is not yet supported by PyTorch LTS wheels; 3.11 is the sweet-spot.
+  
 
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+# macOS / Linux
+python3.11 -m venv .venv
+source .venv/bin/activate
+
+# Windows (PowerShell)
+py -3.11 -m venv .venv
+.venv\Scripts\Activate
+```
+Upgrade the build tools once:
+```bash
+python -m pip install -U pip wheel
 ```
 
-### 3. Install Dependencies  
-The project uses requirements.txt for dependency management.  
-Install all required dependencies by running:  
+### 3. Install the locked runtime (recommended)  
+requirements-lock.txt contains exact wheels that have been smoke-tested on the three major platforms.  
 
 ```bash
-pip install -r requirements.txt
-```
-This command will automatically install all dependencies listed in the requirements.txt file, which mirrors the [dependencies] section of pyproject.toml.  
-
-For those wishing to contribute or develop the project further, optional development dependencies (for linting, type checking, and testing) can be installed using:  
-```bash
-pip install -r requirements-dev.txt
-```
-This ensures compatibility with tools such as Ruff, MyPy, Black, and PyTest <user_query>.  
+pip install -r requirements-lock.txt  
+```  
+  
 
 ## Execution  
 Once the environment is set up, the primary entry point for training the model is the scripts/train.py script.  
