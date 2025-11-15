@@ -2,9 +2,8 @@ from __future__ import annotations
 from typing import Sequence
 import pennylane as qml # type: ignore
 
-# ✅ Coba import broadcast dengan fallback versi lama
 try:
-    # Pennylane >= 0.43
+    
     from pennylane.ops.functions import broadcast as qml_broadcast # type: ignore
 except ImportError:
     try:
