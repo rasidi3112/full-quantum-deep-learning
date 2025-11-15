@@ -127,7 +127,48 @@ requirements-lock.txt contains exact wheels that have been smoke-tested on the t
 
 ```bash
 pip install -r requirements-lock.txt  
-```  
+```
+"*Takes ≈ 2 min on a fresh M2 MacBook Air (all wheels, ≈ 400 MB).*"  
+
+### 4. (Optional) Install development tools  
+If you want to run the test-suite, linter or type-checker:  
+```bash
+pip install -r requirements-dev.txt   # black, ruff, mypy, pytest, pre-commit
+pre-commit install                    # keeps code-style consistent
+```
+### 5. Verify the stack  
+```bash
+python - << "PY"
+import torch, pennylane as qml, torch_geometric, sklearn, qiskit
+print("torch        ", torch.__version__)
+print("pennylane    ", qml.__version__)
+print("torch-scatter", torch_geometric.__version__)
+print("scikit-learn ", sklearn.__version__)
+print("qiskit       ", qiskit.__version__)
+PY
+```
+"*All imports should succeed and print exactly the versions listed in requirements-lock.txt.*"  
+
+### Need CUDA (Linux / Windows only)?  
+
+Replace the CPU index with the CUDA 11.8 wheel index:  
+```bash
+pip install --upgrade \
+  --extra-index-url https://download.pytorch.org/whl/cu118 \
+  torch==2.3.1+cu118 torchvision==0.18.1+cu118 torchaudio==2.3.1+cu118
+
+pip install -f https://data.pyg.org/whl/torch-2.3.0+cu118.html \
+  torch-scatter torch-sparse
+```
+### Troubleshooting  
+| Symptom                                                        | Fix                                                                                                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `AttributeError: module 'autoray.autoray' has no attribute 'NumpyMimic'` | You installed `autoray > 0.6.12`; run `pip install "autoray==0.6.12"`                                                                 |
+| `error: Microsoft Visual C++ 14.x required`                   | On Windows install [Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) **or** simply use the locked wheels (no compile) |
+| `gfortran: command not found`                                  | You are on Python ≥ 3.12; downgrade to 3.11 and use the lock-file                                                                     |
+
+
+
   
 
 ## Execution  
